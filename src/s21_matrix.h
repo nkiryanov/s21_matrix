@@ -2,8 +2,8 @@
 #define SRC_S21_MATRIX_H_
 
 #include <stdint.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 enum S21_BOOL {
   S21_FALSE,
@@ -28,5 +28,6 @@ typedef struct matrix_struct {
 ------------------------------------------------------ */
 
 int s21_create_matrix(int rows, int columns, matrix_t* result);
+void s21_remove_matrix(matrix_t* matrix);
 
 #endif  // SRC_S21_MATRIX_H_

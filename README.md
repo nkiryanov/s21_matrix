@@ -15,8 +15,8 @@ typedef struct matrix_struct {
 ### Функции
 | Готовность | Название функции | Сигнатура |
 | - | ------ |------------------------------------------------------------------------------------|
-| 🔴 | Создание | int s21_create_matrix(int rows, int columns, matrix_t *result); |
-| 🔴 | Очистка | void s21_remove_matrix(matrix_t *A); |
+| 🟢 | Создание | int s21_create_matrix(int rows, int columns, matrix_t *result); |
+| 🟢 | Очистка | void s21_remove_matrix(matrix_t *A); |
 | 🔴 | Сравнение | int s21_eq_matrix(matrix_t *A, matrix_t *B); |
 | 🔴 | Сложение | int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result); |
 | 🔴 | Вычитание | int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result); |
