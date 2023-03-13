@@ -29,6 +29,8 @@ jobs:
 
       - name: upload coverage to Codecov
         uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       - name: try to gen gcov_report
         run: make gcov_report
