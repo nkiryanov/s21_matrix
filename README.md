@@ -1,3 +1,5 @@
+[![Lint and test](https://github.com/nkiryanov/s21_matrix/actions/workflows/ci.yaml/badge.svg)](https://github.com/nkiryanov/s21_matrix/actions/workflows/ci.yaml)
+
 # s21_matrix
 
 Работа с матрицами в C
