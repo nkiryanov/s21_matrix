@@ -1,4 +1,4 @@
-[![Lint and test](https://github.com/nkiryanov/s21_matrix/actions/workflows/ci.yaml/badge.svg)](https://github.com/nkiryanov/s21_matrix/actions/workflows/ci.yaml)
+[![Lint and test](https://github.com/nkiryanov/s21_matrix/actions/workflows/ci.yaml/badge.svg)](https://github.com/nkiryanov/s21_matrix/actions/workflows/ci.yaml) [![codecov](https://codecov.io/gh/nkiryanov/s21_matrix/branch/main/graph/badge.svg?token=V5LV3KVG84)](https://codecov.io/gh/nkiryanov/s21_matrix)
 
 # s21_matrix
 
