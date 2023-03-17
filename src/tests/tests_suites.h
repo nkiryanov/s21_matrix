@@ -6,6 +6,7 @@
 Suite *make_master_suite(void);
 Suite *make_suite_s21_create_matrix(void);
 Suite *make_suite_s21_eq_matrix(void);
+Suite *make_suite_s21_minor_matrix(void);
 Suite *make_suite_s21_mult_matrix(void);
 Suite *make_suite_s21_mult_number(void);
 Suite *make_suite_s21_remove_matrix(void);
