@@ -9,6 +9,8 @@ int main(void) {
   sr = srunner_create(make_master_suite());
 
   srunner_add_suite(sr, make_suite_s21_create_matrix());
+  srunner_add_suite(sr, make_suite_s21_eq_matrix());
+  srunner_add_suite(sr, make_suite_s21_is_valid_matrix());
   srunner_add_suite(sr, make_suite_s21_remove_matrix());
 
   // We set NOFORK mode for debug ability and testing with valgrind

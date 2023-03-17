@@ -45,8 +45,8 @@ fmt:
 
 test: tests
 
-tests: CFLAGS += -g -fsanitize=address
-tests: LDFLAGS += --coverage -fsanitize=address
+tests: CFLAGS += -fsanitize=address
+tests: LDFLAGS += -fsanitize=address
 tests: $(TEST_EXEC)
 	@$^
 
@@ -56,21 +56,24 @@ coverage_report: tests
 gcov_report: coverage_report
 	genhtml $(COVERAGE_FILE) --output-directory $(COVERAGE_REPORT_DIR)
 
+valgrind_tests: $(TEST_EXEC)
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose $^
+
 $(LIB): $(OBJ)
 	$(AR) -rcs $@ $^
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
-$(OBJ_DIR)%_profiled.o: CFLAGS += --coverage
+$(OBJ_DIR)%_profiled.o: CFLAGS += --coverage -g
 $(OBJ_DIR)%_profiled.o: $(SRC_DIR)%.c
 	$(CC) -c $(CFLAGS) $< -o $@
 
 $(TEST_OBJ_DIR)%.o: $(TEST_DIR)%.c
 	$(CC) -c $(CFLAGS) $^ -o $@
 
-$(TEST_EXEC): CFLAGS += $(shell pkg-config --cflags-only-I check)
-$(TEST_EXEC): LDLIBS += $(shell pkg-config --libs check)
+$(TEST_EXEC): CFLAGS += $(shell pkg-config --cflags-only-I check) -g
+$(TEST_EXEC): LDLIBS += $(shell pkg-config --libs check) --coverage
 $(TEST_EXEC): $(TEST_OBJ) $(OBJ_PROFILED)
 	$(CC) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 

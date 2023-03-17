@@ -2,6 +2,7 @@
 
 static double **calloc_matrix(uint32_t rows, uint32_t columns) {
   // All the validations has to be done outside this function
+  // Create and return pointer to 2 dimensional array filled with 0
 
   double **matrix = (double **)malloc(sizeof(double *) * rows +
                                       sizeof(double) * rows * columns);

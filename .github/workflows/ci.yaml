@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: install dependencies
-        run: sudo apt-get install check lcov clang-format cppcheck -y
+        run: sudo apt-get install check lcov clang-format valgrind cppcheck -y
 
       - name: lint
         run: make lint
@@ -23,6 +23,11 @@ jobs:
 
       - name: test
         run: make test
+
+      - name: check memory leaks
+        run: |
+          make clean
+          make valgrind_tests
 
       - name: gcov coverage report
         run: make coverage_report

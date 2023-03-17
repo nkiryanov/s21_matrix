@@ -5,6 +5,8 @@
 
 Suite *make_master_suite(void);
 Suite *make_suite_s21_create_matrix(void);
+Suite *make_suite_s21_eq_matrix(void);
+Suite *make_suite_s21_is_valid_matrix(void);
 Suite *make_suite_s21_remove_matrix(void);
 
 #endif  // SRC_TESTS_TEST_SUITES_H_
