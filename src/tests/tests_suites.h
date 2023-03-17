@@ -11,6 +11,7 @@ Suite *make_suite_s21_mult_number(void);
 Suite *make_suite_s21_remove_matrix(void);
 Suite *make_suite_s21_sub_matrix(void);
 Suite *make_suite_s21_sum_matrix(void);
+Suite *make_suite_s21_transpose(void);
 Suite *make_suite_s21_validate_matrix(void);
 
 #endif  // SRC_TESTS_TEST_SUITES_H_
