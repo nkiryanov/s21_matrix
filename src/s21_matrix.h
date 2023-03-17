@@ -17,7 +17,7 @@ enum S21_BOOL {
 #define SUCCESS 1
 
 #define OK 0
-#define INCORRECT_MATRIX 1
+#define BAD_MATRIX 1
 #define CALCULATION_ERROR 2
 
 typedef struct matrix_struct {
@@ -34,7 +34,8 @@ typedef struct matrix_struct {
 
 int s21_create_matrix(int rows, int columns, matrix_t* result);
 int s21_eq_matrix(matrix_t *A, matrix_t *B);
-int s21_is_valid_matrix(matrix_t *matrix);
 void s21_remove_matrix(matrix_t* matrix);
+int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result);
+int s21_validate_matrix(matrix_t *matrix);
 
 #endif  // SRC_S21_MATRIX_H_

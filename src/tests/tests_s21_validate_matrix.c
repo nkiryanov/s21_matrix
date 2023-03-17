@@ -13,7 +13,7 @@ static void setup(void) {
 static void teardown(void) { s21_remove_matrix(&matrix); }
 
 START_TEST(test_regular_matrix_valid) {
-  is_valid = s21_is_valid_matrix(&matrix);
+  is_valid = s21_validate_matrix(&matrix);
 
   ck_assert_int_eq(is_valid, S21_TRUE);
 }
@@ -27,7 +27,7 @@ START_TEST(test_manually_created_matrix_valid) {
       .matrix = (double **)matrix_array,
   };
 
-  is_valid = s21_is_valid_matrix(&manual_matrix);
+  is_valid = s21_validate_matrix(&manual_matrix);
 
   ck_assert_int_eq(is_valid, S21_TRUE);
 }
@@ -36,7 +36,7 @@ END_TEST
 START_TEST(test_false_if_rows_null) {
   matrix.rows = 0;
 
-  is_valid = s21_is_valid_matrix(&matrix);
+  is_valid = s21_validate_matrix(&matrix);
 
   ck_assert_int_eq(is_valid, S21_FALSE);
 }
@@ -45,7 +45,7 @@ END_TEST
 START_TEST(test_false_if_rows_less_zero) {
   matrix.rows = -1;
 
-  is_valid = s21_is_valid_matrix(&matrix);
+  is_valid = s21_validate_matrix(&matrix);
 
   ck_assert_int_eq(is_valid, S21_FALSE);
 }
@@ -54,7 +54,7 @@ END_TEST
 START_TEST(test_false_if_columns_null) {
   matrix.columns = 0;
 
-  is_valid = s21_is_valid_matrix(&matrix);
+  is_valid = s21_validate_matrix(&matrix);
 
   ck_assert_int_eq(is_valid, S21_FALSE);
 }
@@ -63,7 +63,7 @@ END_TEST
 START_TEST(test_false_if_columns_less_zero) {
   matrix.columns = -1;
 
-  is_valid = s21_is_valid_matrix(&matrix);
+  is_valid = s21_validate_matrix(&matrix);
 
   ck_assert_int_eq(is_valid, S21_FALSE);
 }
@@ -72,7 +72,7 @@ END_TEST
 START_TEST(test_false_if_submatrix_pointer_to_null) {
   matrix_t matrix_to_null = {.rows = 2, .columns = 3, .matrix = NULL};
 
-  is_valid = s21_is_valid_matrix(&matrix_to_null);
+  is_valid = s21_validate_matrix(&matrix_to_null);
 
   ck_assert_int_eq(is_valid, S21_FALSE);
 }
@@ -81,14 +81,14 @@ END_TEST
 START_TEST(test_false_if_matrix_pointer_to_null) {
   matrix_t *matrix_ptr = NULL;
 
-  is_valid = s21_is_valid_matrix(matrix_ptr);
+  is_valid = s21_validate_matrix(matrix_ptr);
 
   ck_assert_int_eq(is_valid, S21_FALSE);
 }
 END_TEST
 
-Suite *make_suite_s21_is_valid_matrix(void) {
-  Suite *s = suite_create("s21_is_valid_matrix");
+Suite *make_suite_s21_validate_matrix(void) {
+  Suite *s = suite_create("s21_validate_matrix");
   TCase *tc = tcase_create("Core");
 
   tcase_add_checked_fixture(tc, setup, teardown);

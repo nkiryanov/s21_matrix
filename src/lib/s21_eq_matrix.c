@@ -2,7 +2,7 @@
 
 int s21_eq_matrix(matrix_t *A, matrix_t *B) {
   // Edge cases
-  if (!s21_is_valid_matrix(A) || !s21_is_valid_matrix(B)) return FAILURE;
+  if (!s21_validate_matrix(A) || !s21_validate_matrix(B)) return FAILURE;
   if (A->rows != B->rows || A->columns != B->columns) return FAILURE;
 
   // Regular case

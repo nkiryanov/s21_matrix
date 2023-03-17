@@ -25,8 +25,8 @@ static double **calloc_matrix(uint32_t rows, uint32_t columns) {
 }
 
 int s21_create_matrix(int rows, int columns, matrix_t *result) {
-  if (rows <= 0 || columns <= 0) return INCORRECT_MATRIX;
-  if (result == NULL) return INCORRECT_MATRIX;
+  if (rows <= 0 || columns <= 0) return BAD_MATRIX;
+  if (result == NULL) return BAD_MATRIX;
 
   result->rows = rows;
   result->columns = columns;

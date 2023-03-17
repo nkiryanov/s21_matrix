@@ -50,21 +50,21 @@ END_TEST
 START_TEST(test_return_error_when_rows_less_or_zero) {
   int status = s21_create_matrix(0, 11, &matrix);
 
-  ck_assert_int_eq(status, INCORRECT_MATRIX);
+  ck_assert_int_eq(status, BAD_MATRIX);
 }
 END_TEST
 
 START_TEST(test_return_error_when_columns_less_or_zero) {
   int status = s21_create_matrix(11, 0, &matrix);
 
-  ck_assert_int_eq(status, INCORRECT_MATRIX);
+  ck_assert_int_eq(status, BAD_MATRIX);
 }
 END_TEST
 
 START_TEST(test_return_error_when_if_matrix_it_pointer_to_null) {
   int status = s21_create_matrix(11, 20, NULL);
 
-  ck_assert_int_eq(status, INCORRECT_MATRIX);
+  ck_assert_int_eq(status, BAD_MATRIX);
 }
 END_TEST
 
