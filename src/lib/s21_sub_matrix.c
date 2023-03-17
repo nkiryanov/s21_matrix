@@ -1,6 +1,6 @@
 #include "../s21_matrix.h"
 
-int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
+int s21_sub_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
   // Edge cases
   if (!s21_validate_matrix(A) || !s21_validate_matrix(B)) return BAD_MATRIX;
   if (result == NULL) return BAD_MATRIX;
@@ -13,7 +13,7 @@ int s21_sum_matrix(matrix_t *A, matrix_t *B, matrix_t *result) {
 
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < columns; ++j) {
-      result->matrix[i][j] = A->matrix[i][j] + B->matrix[i][j];
+      result->matrix[i][j] = A->matrix[i][j] - B->matrix[i][j];
     }
   }
 

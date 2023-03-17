@@ -11,6 +11,7 @@ int main(void) {
   srunner_add_suite(sr, make_suite_s21_create_matrix());
   srunner_add_suite(sr, make_suite_s21_eq_matrix());
   srunner_add_suite(sr, make_suite_s21_remove_matrix());
+  srunner_add_suite(sr, make_suite_s21_sub_matrix());
   srunner_add_suite(sr, make_suite_s21_sum_matrix());
   srunner_add_suite(sr, make_suite_s21_validate_matrix());
 

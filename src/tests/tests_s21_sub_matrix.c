@@ -25,7 +25,7 @@ static void teardown(void) {
 }
 
 START_TEST(test_empty_same_size_matrix_return_empty_matrix) {
-  status = s21_sum_matrix(&A, &B, &result);
+  status = s21_sub_matrix(&A, &B, &result);
 
   is_equal = s21_eq_matrix(&result, &expected);
   ck_assert_int_eq(status, OK);
@@ -33,12 +33,12 @@ START_TEST(test_empty_same_size_matrix_return_empty_matrix) {
 }
 END_TEST
 
-START_TEST(test_sums_all_values) {
+START_TEST(test_subs_all_rows_and_columns) {
   A.matrix[0][0] = 256.0, A.matrix[1][0] = 1;
   B.matrix[0][0] = 1, B.matrix[1][0] = 2;
-  expected.matrix[0][0] = 257, expected.matrix[1][0] = 3;
+  expected.matrix[0][0] = 255, expected.matrix[1][0] = -1;
 
-  status = s21_sum_matrix(&A, &B, &result);
+  status = s21_sub_matrix(&A, &B, &result);
 
   is_equal = s21_eq_matrix(&result, &expected);
   ck_assert_int_eq(status, OK);
@@ -49,7 +49,7 @@ END_TEST
 START_TEST(test_return_bad_matrix_if_first_bad) {
   A.rows = 0;  // Makes matrix incorrect
 
-  status = s21_sum_matrix(&A, &B, &result);
+  status = s21_sub_matrix(&A, &B, &result);
 
   ck_assert_int_eq(status, BAD_MATRIX);
 }
@@ -58,7 +58,7 @@ END_TEST
 START_TEST(test_return_bad_matrix_if_second_bad) {
   B.columns = 0;  // Makes matrix incorrect
 
-  status = s21_sum_matrix(&A, &B, &result);
+  status = s21_sub_matrix(&A, &B, &result);
 
   ck_assert_int_eq(status, BAD_MATRIX);
 }
@@ -67,7 +67,7 @@ END_TEST
 START_TEST(test_return_bad_matrix_if_result_null_pointer) {
   matrix_t *null_ptr = NULL;
 
-  status = s21_sum_matrix(&A, &B, null_ptr);
+  status = s21_sub_matrix(&A, &B, null_ptr);
 
   ck_assert_int_eq(status, BAD_MATRIX);
 }
@@ -76,7 +76,7 @@ END_TEST
 START_TEST(test_return_calculation_error_if_rows_differs) {
   A.rows = 10;  // B has only 2 rows
 
-  status = s21_sum_matrix(&A, &B, &result);
+  status = s21_sub_matrix(&A, &B, &result);
 
   ck_assert_int_eq(status, CALCULATION_ERROR);
 }
@@ -85,21 +85,21 @@ END_TEST
 START_TEST(test_return_calculation_error_if_columns_differs) {
   B.columns = 10;  // A has only 1 column
 
-  status = s21_sum_matrix(&A, &B, &result);
+  status = s21_sub_matrix(&A, &B, &result);
 
   ck_assert_int_eq(status, CALCULATION_ERROR);
 }
 END_TEST
 
-Suite *make_suite_s21_sum_matrix(void) {
-  Suite *s = suite_create("s21_sum_matrix");
+Suite *make_suite_s21_sub_matrix(void) {
+  Suite *s = suite_create("s21_sub_matrix");
   TCase *tc = tcase_create("Core");
 
   tcase_add_checked_fixture(tc, setup, teardown);
 
   suite_add_tcase(s, tc);
   tcase_add_test(tc, test_empty_same_size_matrix_return_empty_matrix);
-  tcase_add_test(tc, test_sums_all_values);
+  tcase_add_test(tc, test_subs_all_rows_and_columns);
   tcase_add_test(tc, test_return_bad_matrix_if_first_bad);
   tcase_add_test(tc, test_return_bad_matrix_if_second_bad);
   tcase_add_test(tc, test_return_bad_matrix_if_result_null_pointer);
