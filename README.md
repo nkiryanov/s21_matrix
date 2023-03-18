@@ -27,7 +27,7 @@ typedef struct matrix_struct {
 | 🟢 | Транспонирование | int s21_transpose(matrix_t *A, matrix_t *result); |
 | 🟢 | Минор и матрица алгебраических дополнений | int s21_calc_complements(matrix_t *A, matrix_t *result); |
 | 🟢 | Определитель | int s21_determinant(matrix_t *A, double *result); |
-| 🔴 | Обратная матрица | int s21_inverse_matrix(matrix_t *A, matrix_t *result); |
+| 🟢 | Обратная матрица | int s21_inverse_matrix(matrix_t *A, matrix_t *result); |
 
 
 ### Дополнительные определения
