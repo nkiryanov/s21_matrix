@@ -8,7 +8,10 @@ static matrix_t expected;
 static int is_equal;
 static int status;
 
-static void fill_matrix(double **A, matrix_t *matrix, int rows, int columns) {
+static void fill_matrix(double **A, matrix_t *matrix) {
+  int rows = matrix->rows;
+  int columns = matrix->columns;
+
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < columns; ++j) {
       matrix->matrix[i][j] = *((double *)(A + i * columns) + j);
@@ -29,7 +32,7 @@ static void setup(void) {
       {13, 14, 15, 16},
   };
 
-  fill_matrix((double **)initial_matrix_values, &matrix, 4, 4);
+  fill_matrix((double **)initial_matrix_values, &matrix);
 }
 
 static void teardown(void) {
@@ -44,7 +47,7 @@ START_TEST(test_minor_matrix_first_element) {
       {10, 11, 12},
       {14, 15, 16},
   };
-  fill_matrix((double **)expected_value, &expected, 3, 3);
+  fill_matrix((double **)expected_value, &expected);
 
   status = s21_minor_matrix(&matrix, 0, 0, &result);
 
@@ -60,7 +63,7 @@ START_TEST(test_minor_matrix_middle_element) {
       {5, 7, 8},
       {13, 15, 16},
   };
-  fill_matrix((double **)expected_value, &expected, 3, 3);
+  fill_matrix((double **)expected_value, &expected);
 
   status = s21_minor_matrix(&matrix, 2, 1, &result);
 

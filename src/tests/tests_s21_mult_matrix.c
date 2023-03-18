@@ -5,14 +5,14 @@
 static matrix_t A;
 static matrix_t B;
 static matrix_t result;
-static matrix_t expect;
+static matrix_t expected;
 static int is_equal;
 static int status;
 
 static void setup(void) {
   s21_create_matrix(3, 2, &A);
   s21_create_matrix(2, 3, &B);
-  s21_create_matrix(3, 3, &expect);
+  s21_create_matrix(3, 3, &expected);
   is_equal = -99;
   status = -99;
 }
@@ -20,14 +20,17 @@ static void setup(void) {
 static void teardown(void) {
   s21_remove_matrix(&A);
   s21_remove_matrix(&B);
-  s21_remove_matrix(&expect);
+  s21_remove_matrix(&expected);
   s21_remove_matrix(&result);
 }
 
-static void fill_matrix(double **A, double **matrix, int rows, int columns) {
+static void fill_matrix(double **A, matrix_t *matrix) {
+  int rows = matrix->rows;
+  int columns = matrix->columns;
+
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < columns; ++j) {
-      matrix[i][j] = *((double *)(A + i * columns) + j);
+      matrix->matrix[i][j] = *((double *)(A + i * columns) + j);
     }
   }
 }
@@ -35,7 +38,7 @@ static void fill_matrix(double **A, double **matrix, int rows, int columns) {
 START_TEST(test_empty_compatible_matrices_return_empty_matrix) {
   status = s21_mult_matrix(&A, &B, &result);
 
-  is_equal = s21_eq_matrix(&result, &expect);
+  is_equal = s21_eq_matrix(&result, &expected);
   ck_assert_int_eq(status, OK);
   ck_assert_int_eq(is_equal, SUCCESS);
 }
@@ -45,13 +48,13 @@ START_TEST(test_mult_all_rows_and_columns) {
   double a_matrix[3][2] = {{1, 2}, {3, 4}, {5, 6}};
   double b_matrix[2][3] = {{1, 2, 3}, {4, 5, 6}};
   double e_matrix[3][3] = {{9, 12, 15}, {19, 26, 33}, {29, 40, 51}};
-  fill_matrix((double **)a_matrix, A.matrix, A.rows, A.columns);
-  fill_matrix((double **)b_matrix, B.matrix, B.rows, B.columns);
-  fill_matrix((double **)e_matrix, expect.matrix, expect.rows, expect.columns);
+  fill_matrix((double **)a_matrix, &A);
+  fill_matrix((double **)b_matrix, &B);
+  fill_matrix((double **)e_matrix, &expected);
 
   status = s21_mult_matrix(&A, &B, &result);
 
-  is_equal = s21_eq_matrix(&result, &expect);
+  is_equal = s21_eq_matrix(&result, &expected);
   ck_assert_int_eq(status, OK);
   ck_assert_int_eq(is_equal, SUCCESS);
 }

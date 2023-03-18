@@ -4,24 +4,27 @@
 
 static matrix_t A;
 static matrix_t result;
-static matrix_t expect;
+static matrix_t expected;
 static int is_equal;
 static int status;
 
 static void setup(void) {
   s21_create_matrix(3, 2, &A);
-  s21_create_matrix(2, 3, &expect);
+  s21_create_matrix(2, 3, &expected);
   is_equal = -99;
   status = -99;
 }
 
 static void teardown(void) {
   s21_remove_matrix(&A);
-  s21_remove_matrix(&expect);
+  s21_remove_matrix(&expected);
   s21_remove_matrix(&result);
 }
 
-static void fill_matrix(double **A, matrix_t *matrix, int rows, int columns) {
+static void fill_matrix(double **A, matrix_t *matrix) {
+  int rows = matrix->rows;
+  int columns = matrix->columns;
+
   for (int i = 0; i < rows; ++i) {
     for (int j = 0; j < columns; ++j) {
       matrix->matrix[i][j] = *((double *)(A + i * columns) + j);
@@ -32,7 +35,7 @@ static void fill_matrix(double **A, matrix_t *matrix, int rows, int columns) {
 START_TEST(test_empty_matrix_return_empty_wit_correct_dimension) {
   status = s21_transpose(&A, &result);
 
-  is_equal = s21_eq_matrix(&result, &expect);
+  is_equal = s21_eq_matrix(&result, &expected);
   ck_assert_int_eq(status, OK);
   ck_assert_int_eq(is_equal, SUCCESS);
 }
@@ -51,12 +54,12 @@ START_TEST(test_transposed_ok) {
       {1, 2, 3},
       {4, 5, 6},
   };
-  fill_matrix((double **)a_matrix, &A, A.rows, A.columns);
-  fill_matrix((double **)expect_matrix, &expect, expect.rows, expect.columns);
+  fill_matrix((double **)a_matrix, &A);
+  fill_matrix((double **)expect_matrix, &expected);
 
   status = s21_transpose(&A, &result);
 
-  is_equal = s21_eq_matrix(&result, &expect);
+  is_equal = s21_eq_matrix(&result, &expected);
   ck_assert_int_eq(status, OK);
   ck_assert_int_eq(is_equal, SUCCESS);
 }
