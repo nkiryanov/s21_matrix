@@ -4,6 +4,7 @@
 #include <check.h>
 
 Suite *make_master_suite(void);
+Suite *make_suite_s21_calc_complements(void);
 Suite *make_suite_s21_create_matrix(void);
 Suite *make_suite_s21_determinant(void);
 Suite *make_suite_s21_eq_matrix(void);

@@ -8,6 +8,7 @@ int main(void) {
   SRunner *sr;
   sr = srunner_create(make_master_suite());
 
+  srunner_add_suite(sr, make_suite_s21_calc_complements());
   srunner_add_suite(sr, make_suite_s21_create_matrix());
   srunner_add_suite(sr, make_suite_s21_determinant());
   srunner_add_suite(sr, make_suite_s21_eq_matrix());

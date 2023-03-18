@@ -4,6 +4,7 @@ int s21_determinant(matrix_t *A, double *result) {
   // Edge cases
   if (!s21_validate_matrix(A)) return BAD_MATRIX;
   if (A->rows != A->columns) return CALCULATION_ERROR;
+  if (result == NULL) return CALCULATION_ERROR;
 
   // Regular case
   int size = A->rows;
@@ -17,8 +18,9 @@ int s21_determinant(matrix_t *A, double *result) {
       s21_minor_matrix(A, 0, j, &minor_matrix);  // Calculate by first row
       s21_determinant(&minor_matrix, &minor_determinant);
       sub_result += sign * A->matrix[0][j] * minor_determinant;
-      s21_remove_matrix(&minor_matrix);
       sign *= -1;
+
+      s21_remove_matrix(&minor_matrix);
     }
     *result = sub_result;
   }

@@ -105,6 +105,13 @@ START_TEST(test_return_calculation_error_if_not_square) {
 }
 END_TEST
 
+START_TEST(test_return_calculation_error_if_result_null_ptr) {
+  status = s21_determinant(&matrix, NULL);
+
+  ck_assert_int_eq(status, CALCULATION_ERROR);
+}
+END_TEST
+
 Suite *make_suite_s21_determinant(void) {
   Suite *s = suite_create("s21_determinant");
   TCase *tc = tcase_create("Core");
@@ -118,6 +125,7 @@ Suite *make_suite_s21_determinant(void) {
   tcase_add_test(tc, test_determinant_for_matrix_with_same_rows);
   tcase_add_test(tc, test_return_bad_matrix_if_matrix_bad);
   tcase_add_test(tc, test_return_calculation_error_if_not_square);
+  tcase_add_test(tc, test_return_calculation_error_if_result_null_ptr);
 
   return s;
 }
